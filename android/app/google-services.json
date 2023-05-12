@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "890566733352",
+    "project_id": "flaminqo-ordercoffee",
+    "storage_bucket": "flaminqo-ordercoffee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890566733352:android:7efad74fdf39bb038b8f1d",
+        "android_client_info": {
+          "package_name": "com.flaminqo.ordercoffee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890566733352-56uf3dck2ahdr4g4nkmh2v60mpcsmglm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDx_EAG2TGAtP4jBWBmG_hcJ-Rj2pd0tY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "890566733352-56uf3dck2ahdr4g4nkmh2v60mpcsmglm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
