@@ -29,6 +29,13 @@
             {
               "client_id": "890566733352-56uf3dck2ahdr4g4nkmh2v60mpcsmglm.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "890566733352-7tquoag9oudogb5vtf90afgbupo8kabt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flaminqo.ordercoffee"
+              }
             }
           ]
         }
