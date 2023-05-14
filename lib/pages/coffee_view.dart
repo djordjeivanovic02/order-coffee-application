@@ -4,8 +4,15 @@ import 'package:ordercoffee/enums/functionality.dart';
 import 'package:ordercoffee/pages/parts.dart';
 import 'package:ordercoffee/services/auth/auth_service.dart';
 
-class CoffeeView extends StatelessWidget {
+class CoffeeView extends StatefulWidget {
   const CoffeeView({super.key});
+
+  @override
+  State<CoffeeView> createState() => _CoffeeViewState();
+}
+
+class _CoffeeViewState extends State<CoffeeView> {
+  double _currentSliderValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +21,46 @@ class CoffeeView extends StatelessWidget {
         backgroundColor: Colors.brown[500],
         title: const Text('OrderCoffee'),
         actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    padding: const EdgeInsets.all(20),
+                    color: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Dodaj novu narudzbinu',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text('Jacina kafe'),
+                        Slider(
+                          value: _currentSliderValue,
+                          max: 100,
+                          divisions: 5,
+                          label: _currentSliderValue.round().toString(),
+                          onChanged: (double value) {
+                            setState(() {
+                              _currentSliderValue = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            icon: const Icon(Icons.add_box_outlined),
+          ),
           PopupMenuButton(
             onSelected: (value) async {
               switch (value) {
