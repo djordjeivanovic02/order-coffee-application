@@ -39,3 +39,36 @@ InputDecoration inputFieldDecoration() {
     hintText: 'Unesite Vasu email adresu',
   );
 }
+
+Future<bool?> showErrorDialog(BuildContext context, String title,
+    String content, Map<String, bool> options) {
+  return showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: options.keys.map(
+          (x) {
+            final bool? value = options[x];
+            return TextButton(
+              onPressed: () {
+                if (value != null) {
+                  Navigator.of(context).pop(value);
+                } else {
+                  Navigator.of(context).pop();
+                }
+              },
+              child: Text(
+                x,
+                style: TextStyle(
+                  color: Colors.brown[500],
+                ),
+              ),
+            );
+          },
+        ).toList(),
+      );
+    },
+  );
+}

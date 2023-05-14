@@ -16,4 +16,6 @@ class WeakPasswordException implements Exception {}
 
 class UserNotLoggedInException implements Exception {}
 
+class UserAlreaduExistException implements Exception {}
+
 class GenericException implements Exception {}

@@ -40,6 +40,8 @@ class FirebaseAuthProvider extends AuthProvider {
           throw AccountExistWithDifferentCredentialException();
         case 'weak-password':
           throw WeakPasswordException();
+        case 'email-already-in-use':
+          throw UserAlreaduExistException();
         default:
           throw GenericException();
       }
@@ -81,7 +83,7 @@ class FirebaseAuthProvider extends AuthProvider {
         throw UserNotLoggedInException();
       }
     } on FirebaseAuthException catch (e) {
-      print(e.code);
+      print(e);
       switch (e.code) {
         case 'invalid-email':
           throw InvalidEmailException();
@@ -99,6 +101,8 @@ class FirebaseAuthProvider extends AuthProvider {
           throw AccountExistWithDifferentCredentialException();
         case 'weak-password':
           throw WeakPasswordException();
+        case 'email-already-in-use':
+          throw UserAlreaduExistException();
         default:
           throw GenericException();
       }

@@ -80,71 +80,63 @@ class _LoginViewState extends State<LoginView> {
                       throw UserNotLoggedInException();
                     }
                   } on UserDisabledException {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Ovaj nalog je blokiran. Pokusajte kasnije!',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Ovaj nalog je blokiran. Pokusajte kasnije!', {
+                      'OK': true,
+                    });
                   } on InvalidEmailException {
                     showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Email adrasa koju ste uneli nije ispravna. Pokusajte sa drugom email adresom.',
-                    );
+                        context,
+                        'Doslo je do greske',
+                        'Email adrasa koju ste uneli nije ispravna. Pokusajte sa drugom email adresom.',
+                        {
+                          'OK': true,
+                        });
                   } on UserNotFoundException {
                     showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Korisnik ne postoji!',
-                    );
+                        context, 'Doslo je do greske', 'Korisnik ne postoji!', {
+                      'OK': true,
+                    });
                   } on WrongPasswordException {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Lozinka koju ste uneli nije tacna!',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Lozinka koju ste uneli nije tacna!', {
+                      'OK': true,
+                    });
                   } on TooManyRequestsException {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Molimo pokusajte kasnije',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Molimo pokusajte kasnije', {
+                      'OK': true,
+                    });
                   } on OperationNotAllowedException {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Molimo pokusajte kasnije',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Molimo pokusajte kasnije', {
+                      'OK': true,
+                    });
                   } on AccountExistWithDifferentCredentialException {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Nalog postoji ali sa drugim podacima!',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Nalog postoji ali sa drugim podacima!', {
+                      'OK': true,
+                    });
                   } on WeakPasswordException {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Uneta lozinka je slaba. Molimo unesite jacu lozinku',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Uneta lozinka je slaba. Molimo unesite jacu lozinku', {
+                      'OK': true,
+                    });
                   } on UserNotLoggedInException {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Korisnik nije prijavljen!',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Korisnik nije prijavljen!', {
+                      'OK': true,
+                    });
                   } on GenericException {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Molimo pokusajte kasnije!',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Molimo pokusajte kasnije!', {
+                      'OK': true,
+                    });
                   } catch (_) {
-                    showErrorDialog(
-                      context,
-                      'Doslo je do greske',
-                      'Molimo pokusajte kasnije!',
-                    );
+                    showErrorDialog(context, 'Doslo je do greske',
+                        'Molimo pokusajte kasnije!', {
+                      'OK': true,
+                    });
                   }
                 },
                 child: const Text(
@@ -183,28 +175,4 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
-}
-
-Future<void> showErrorDialog(
-  BuildContext context,
-  String title,
-  String content,
-) {
-  return showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text(title),
-        content: Text(content),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('U redu'),
-          ),
-        ],
-      );
-    },
-  );
 }
