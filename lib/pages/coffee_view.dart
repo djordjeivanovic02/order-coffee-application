@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ordercoffee/constants/routes.dart';
 import 'package:ordercoffee/enums/functionality.dart';
+import 'package:ordercoffee/pages/new_coffee.dart';
 import 'package:ordercoffee/pages/parts.dart';
 import 'package:ordercoffee/services/auth/auth_service.dart';
 
@@ -23,41 +24,7 @@ class _CoffeeViewState extends State<CoffeeView> {
         actions: [
           IconButton(
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Container(
-                    padding: const EdgeInsets.all(20),
-                    color: Colors.white,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Dodaj novu narudzbinu',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text('Jacina kafe'),
-                        Slider(
-                          value: _currentSliderValue,
-                          max: 100,
-                          divisions: 5,
-                          label: _currentSliderValue.round().toString(),
-                          onChanged: (double value) {
-                            setState(() {
-                              _currentSliderValue = value;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
+              _showModalBottomSheetFunction(context);
             },
             icon: const Icon(Icons.add_box_outlined),
           ),
@@ -130,6 +97,19 @@ class _CoffeeViewState extends State<CoffeeView> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> _showModalBottomSheetFunction(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(20),
+          color: Colors.white,
+          child: const NewCoffeeSettings(),
+        );
+      },
     );
   }
 }
