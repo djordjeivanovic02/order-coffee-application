@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ordercoffee/constants/routes.dart';
-import 'package:ordercoffee/pages/login_view.dart';
 import 'package:ordercoffee/pages/parts.dart';
 import 'package:ordercoffee/services/auth/auth_exceptions.dart';
 import 'package:ordercoffee/services/auth/auth_service.dart';

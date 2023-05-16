@@ -13,8 +13,6 @@ class CoffeeView extends StatefulWidget {
 }
 
 class _CoffeeViewState extends State<CoffeeView> {
-  double _currentSliderValue = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
