@@ -22,13 +22,18 @@ class DatabaseServices {
     });
   }
 
+  Future<void> deleteOrder() async {
+    return await orderCollection.doc(uid).delete();
+  }
+
   List<OrderCoffee> _getOrdersFromSnapshots(QuerySnapshot snapshot) {
     return snapshot.docs.map((e) {
       return OrderCoffee(
+        e.id,
         e['strength'] ?? 0,
         e['sugars'] ?? 0,
         e['milk'] ?? false,
-        e['username'] ?? null,
+        e['username'] ?? '',
       );
     }).toList();
   }

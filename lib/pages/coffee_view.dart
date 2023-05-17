@@ -110,7 +110,8 @@ class _CoffeeViewState extends State<CoffeeView> {
                 ),
                 child: Container(
                   margin: const EdgeInsets.only(top: 20),
-                  child: CoffeeOrdersView(orders: orders),
+                  child:
+                      CoffeeOrdersView(orders: orders, dbServices: _dbServices),
                 ),
               );
             default:
