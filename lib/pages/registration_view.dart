@@ -70,7 +70,6 @@ class _RegistrationViewState extends State<RegistrationView> {
                       password: password,
                     );
                     final user = AuthService.firebase().currentUser;
-                    print('User $user');
                     if (user != null) {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         orderCoffeeViewroute,

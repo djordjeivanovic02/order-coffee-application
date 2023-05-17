@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ordercoffee/services/database/database_coffee.dart';
 
 class NewCoffeeSettings extends StatefulWidget {
   const NewCoffeeSettings({super.key});
@@ -12,6 +14,9 @@ class _NewCoffeeSettingsState extends State<NewCoffeeSettings> {
   Color _thumbColor = Colors.brown[100] as Color;
   int _sugarCount = 0;
   bool milk = false;
+  final DatabaseServices _dbServices =
+      DatabaseServices(FirebaseAuth.instance.currentUser!.uid);
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,45 @@ class _NewCoffeeSettingsState extends State<NewCoffeeSettings> {
           style: TextStyle(
             fontSize: 20,
           ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          children: [
+            const Expanded(
+              flex: 1,
+              child: Text(
+                'Korisnicko ime',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  filled: true,
+                  fillColor: Colors.brown[100],
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.brown[500] as Color,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
         const SizedBox(
           height: 20,
@@ -119,7 +163,9 @@ class _NewCoffeeSettingsState extends State<NewCoffeeSettings> {
                     child: IconButton(
                       onPressed: () {
                         setState(() {
-                          _sugarCount++;
+                          if (_sugarCount < 3) {
+                            _sugarCount++;
+                          }
                         });
                       },
                       color: Colors.brown[500],
@@ -182,8 +228,14 @@ class _NewCoffeeSettingsState extends State<NewCoffeeSettings> {
             width: MediaQuery.of(context).size.width,
             height: 50,
             child: TextButton(
-              onPressed: () {
-                print("${_currentSliderValue ~/ 100} $_sugarCount $milk");
+              onPressed: () async {
+                await _dbServices.updateOrder(
+                  _usernameController.text,
+                  _currentSliderValue ~/ 100,
+                  _sugarCount,
+                  milk,
+                );
+                Navigator.of(context).pop();
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.brown[100],
@@ -197,6 +249,9 @@ class _NewCoffeeSettingsState extends State<NewCoffeeSettings> {
               ),
             ),
           ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
       ],
     );
