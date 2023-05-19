@@ -3,23 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:ordercoffee/services/database/database_coffee.dart';
 
 class NewCoffeeSettings extends StatefulWidget {
-  const NewCoffeeSettings({super.key});
+  final String default_username;
+  final double current_slider_value;
+  final int sugar_count;
+  final bool milk;
+  const NewCoffeeSettings({
+    super.key,
+    required this.default_username,
+    required this.current_slider_value,
+    required this.sugar_count,
+    required this.milk,
+  });
 
   @override
   State<NewCoffeeSettings> createState() => _NewCoffeeSettingsState();
 }
 
 class _NewCoffeeSettingsState extends State<NewCoffeeSettings> {
-  double _currentSliderValue = 100;
-  Color _thumbColor = Colors.brown[100] as Color;
-  int _sugarCount = 0;
-  bool milk = false;
   final DatabaseServices _dbServices =
       DatabaseServices(FirebaseAuth.instance.currentUser!.uid);
   final TextEditingController _usernameController = TextEditingController();
 
+  bool loaded = false;
+  double _currentSliderValue = 100;
+  Color _thumbColor = Colors.brown[100] as Color;
+  int _sugarCount = 0;
+  bool milk = false;
+
   @override
   Widget build(BuildContext context) {
+    if (!loaded) {
+      _usernameController.text = widget.default_username;
+      _currentSliderValue = widget.current_slider_value * 100;
+      _thumbColor = Colors.brown[100] as Color;
+      _sugarCount = widget.sugar_count;
+      milk = widget.milk;
+      loaded = true;
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,

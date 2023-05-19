@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ordercoffee/pages/new_coffee.dart';
 import 'package:ordercoffee/pages/parts.dart';
 import 'package:ordercoffee/services/auth/auth_service.dart';
 import 'package:ordercoffee/services/database/database_coffee.dart';
@@ -42,7 +43,18 @@ class CoffeeOrdersView extends StatelessWidget {
               vertical: 10,
             ),
             child: ListTile(
-              onTap: () {},
+              onTap: () async {
+                if (orders[index].uid ==
+                    AuthService.firebase().currentUser!.uid) {
+                  await _showModalBottomSheetFunction(
+                    context,
+                    orders[index].username,
+                    orders[index].strength.toDouble(),
+                    orders[index].sugars,
+                    orders[index].milk,
+                  );
+                }
+              },
               onLongPress: () async {
                 if (orders[index].uid ==
                     AuthService.firebase().currentUser!.uid) {
@@ -130,6 +142,45 @@ class CoffeeOrdersView extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<dynamic> _showModalBottomSheetFunction(
+    BuildContext context,
+    String default_username,
+    double current_slider_value,
+    int sugar_count,
+    bool milk,
+  ) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 20,
+              left: 20,
+              right: 20,
+              bottom: MediaQuery.of(context)
+                  .viewInsets
+                  .bottom, // Pomera sadržaj iznad tastature
+            ),
+            color: Colors.white,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                NewCoffeeSettings(
+                  default_username: default_username,
+                  current_slider_value: current_slider_value,
+                  sugar_count: sugar_count,
+                  milk: milk,
+                ),
+              ],
             ),
           ),
         );

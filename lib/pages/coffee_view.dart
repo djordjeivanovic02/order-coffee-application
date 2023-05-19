@@ -141,7 +141,12 @@ class _CoffeeViewState extends State<CoffeeView> {
             child: ListView(
               shrinkWrap: true,
               children: const [
-                NewCoffeeSettings(),
+                NewCoffeeSettings(
+                  default_username: "",
+                  current_slider_value: 1,
+                  milk: false,
+                  sugar_count: 0,
+                ),
               ],
             ),
           ),
